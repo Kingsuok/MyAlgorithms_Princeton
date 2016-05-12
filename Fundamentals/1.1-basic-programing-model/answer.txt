@@ -1,1 +1,5 @@
+1. 
+a. 7  b. 200.0000002  c. true
 
+2.
+a. 1.618 b. 10.0 c. true d. 33 (an integer adds a string: the integer will be tranfered to a string first, then the string is added in front of the original string ) Eg. 2+3 + “2” = “52”
