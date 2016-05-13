@@ -3,3 +3,81 @@ a. 7  b. 200.0000002  c. true
 
 2.
 a. 1.618 b. 10.0 c. true d. 33 (an integer adds a string: the integer will be tranfered to a string first, then the string is added in front of the original string ) Eg. 2+3 + “2” = “52”
+
+3.
+package com.algorithm.first;
+
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class TestFirst3 {
+public static void main(String[] args){
+	int a,b,c;
+	StdOut.println("Please input three number:");
+	a = StdIn.readInt();
+	b = StdIn.readInt();
+	c = StdIn.readInt();
+	if (equals(a,b,c) == true){
+		StdOut.print("equal");
+	}else{
+		StdOut.print("not equal");
+	}
+	
+}
+
+public static boolean equals(int a, int b, int c){
+	
+	if (a == b && b == c)
+	{
+		return true;
+	}else{
+		return false;
+	}
+}
+}
+
+4.
+a. if (a > b) c = 0;  b. if (a > b) { c = 0; } d. if (a > b) c = 0; else b = 0;
+
+5.
+package com.algorithm.first;
+
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class testFirst5 {
+
+	public static void main(String[] args){
+		double x;
+		double y;
+		StdOut.println("Please input two double numbers:");
+		x = StdIn.readDouble();
+		y = StdIn.readDouble();
+		/*if (checks(x) && checks(y)){
+			StdOut.print("true");
+		}else{
+			StdOut.print("false");
+		}*/
+		StdOut.print(checks(x) && checks(y));
+	}
+	
+	public static boolean checks(double x ){
+		if (0 < x && x < 1  ){
+			return true;
+		}else{
+			return false;
+		}
+	}
+}
+
+6.
+0 1 1 2 3 5 8 13 21 34 55 89 144 233 377 610
+
+7. 
+a. 3.00009  b. 499500 c.10000
+
+8.
+In java, when the char variables are in the calculation, the char variables will be regarded as the value of Asscii.
+a.  b (because just output a char, not a calculation in which char variables are, just output the char) 
+b. 197 (because using the asscii values, so ..) 
+c. e (cast decimalism to char )
