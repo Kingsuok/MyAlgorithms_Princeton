@@ -5,7 +5,6 @@ a. 7  b. 200.0000002  c. true
 a. 1.618 b. 10.0 c. true d. 33 (an integer adds a string: the integer will be tranfered to a string first, then the string is added in front of the original string ) Eg. 2+3 + “2” = “52”
 
 3.
-package com.algorithm.first;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
@@ -40,12 +39,11 @@ public static boolean equals(int a, int b, int c){
 a. if (a > b) c = 0;  b. if (a > b) { c = 0; } d. if (a > b) c = 0; else b = 0;
 
 5.
-package com.algorithm.first;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
 
-public class testFirst5 {
+public class TestFirst5 {
 
 	public static void main(String[] args){
 		double x;
@@ -81,3 +79,174 @@ In java, when the char variables are in the calculation, the char variables will
 a.  b (because just output a char, not a calculation in which char variables are, just output the char) 
 b. 197 (because using the asscii values, so ..) 
 c. e (cast decimalism to char )
+
+9.
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class TestFirst9 {
+
+	public static void main (String[] args){
+		StdOut.println("Please input the N:");
+		int N = StdIn.readInt();
+		//String s = convert(N);
+		StdOut.println(convert(N));
+	}
+	
+	public static String convert(int n){
+		String s = "";
+		for (int i = n; i > 0; i = i/2){
+			s = i%2 + s; 
+		}
+		return s;
+	}
+}
+
+10.
+It does not allocate memory for a[] with new. This code results in a variable a might not have been initialized compile-time problem.
+The correct codes:
+import edu.princeton.cs.algs4.StdOut;
+
+public class Test {
+
+	public static void main(String[] args){
+		
+		int[] a = new int[10];
+		for (int i = 0; i < 10; i++){
+			a[i] = i*i;
+			StdOut.print(a[i] + " ");
+		}
+	}
+}
+
+11.
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+
+public class TestFirst11 {
+
+	public static void main(String[] args){
+		boolean[][] array = new boolean[10][10];
+		randomInitialization(array);
+		printArray(array);
+	}
+	public static void printArray(boolean[][] array){
+		int length = array.length;
+		for (int i = 0; i < length; i++){
+			StdOut.println();
+			for (int j = 0; j < length; j++){
+				if(array[i][j]){
+					StdOut.print("array[" + i + "]" + "[" + j +"] = "+ "*" + " ");
+				}else{
+					StdOut.print("array[" + i + "]" + "[" + j +"] = "+ " " + " ");
+				}
+			}
+		}
+	}
+	public static boolean[][] randomInitialization(boolean[][] array){
+		int length = array.length;
+		for(int i = 0; i < length; i++){
+			for(int j = 0; j < length; j++){
+				if (StdRandom.bernoulli(0.5)){
+					array[i][j] = true;
+				}else{
+					array[i][j] = false;
+				}
+			}
+		}
+		return array;
+	}
+	
+12.
+0
+1
+2
+3
+4
+4
+3
+2
+1
+0
+13.
+import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
+
+public class TestFirst13 {
+
+	public static void main(String[] args){
+		int[][] array = new int[10][8];
+		arrayInitialization(array, 10);
+		StdOut.print("The original array:");
+		printArray(array);
+		int[][] arrayTransposition = transposition(array);
+		StdOut.printf("\nThe transposition array:");
+		printArray(arrayTransposition);
+	}
+	
+	public static void printArray(int[][] a){
+		int rawLength = a.length;
+		int columnLength = a[0].length;
+		for (int i = 0; i < rawLength; i++){
+			StdOut.println();
+			for (int j = 0; j < columnLength; j++){
+				StdOut.print(a[i][j]+" ");
+			}
+		}
+	}
+	public static int[][] transposition(int[][] a){
+		int rawLength = a.length;
+		int columnLength = a[0].length;
+		int[][] aTrans = new int[columnLength][rawLength];
+		for (int i = 0; i < rawLength; i++){
+			for (int j = 0; j < columnLength; j++){
+				aTrans[j][i] = a[i][j];
+			}
+		}
+		return aTrans;
+	}
+	public static void arrayInitialization(int[][] a, int N){
+		int rawLength = a.length;
+		int columnLength = a[0].length;
+		for (int i = 0; i < rawLength; i++){
+			for (int j = 0; j < columnLength; j++){
+				a[i][j] = StdRandom.uniform(N);
+			}
+		}
+	}
+}
+14.
+clue: convert thinking using match knowledge:
+How to deal with log2N:
+Deduce:
+		log2N ≥ x
+                2^(log2N) ≥ 2^x
+                N ≥ 2^x；
+      N: input parameter, x: goal result.
+      
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class TestFirst14 {
+
+	public static void main(String[] args){
+		StdOut.println("Please input the integer value N:");
+		int N = StdIn.readInt();
+		int result = lg(N);
+		StdOut.print(result);
+	}
+	public static int lg(int N){
+		int result = 0;
+		int temporary = 1;
+		if (N <= 0){
+			throw new RuntimeException("Error, N should be larger than 0");
+		}else{
+		while (N >= temporary){// notice the "="
+			result++;
+			temporary*=2;
+		}
+		return --result;
+		}
+	}
+}      
+      
