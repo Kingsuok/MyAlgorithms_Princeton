@@ -249,4 +249,31 @@ public class TestFirst14 {
 		}
 	}
 }      
-      
+  
+15.
+	public static int[] histogram(int[] a, int M){
+		int length = a.length;
+		int[] count = new int[M];
+		for(int i = 0;i < M-1;i++ ){
+			count[i] = 0;
+		}
+		for(int i = 0 ;i < length; i++){
+			if (0 <= a[i] && a[i] <= M-1){
+				count[a[i]]++;
+			}
+		}
+		return count;
+	}
+16.
+311361142246
+clue:when a string + a integer, the integer will be transfered to be a string, then two strings are added.
+
+17. when the program meets the recursive function, it will not execute the following codes of the function but execute from the original function. So the base case will never be reached. A call to exR2(3) will result in calls to exR2(0) exR2(-3), exR2(-6) and so forth until a StackOverFlowError occurs.
+
+The fixed codes:
+
+	public static String exR2(int n){
+		if (n <= 0) return "";
+		String s = exR2(n - 3) + n + exR2(n - 2);
+		return s;
+	}
