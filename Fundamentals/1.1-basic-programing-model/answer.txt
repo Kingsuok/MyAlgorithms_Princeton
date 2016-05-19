@@ -349,30 +349,57 @@ public class TestFirst21 {
 
 22.
 import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
 
 import edu.princeton.cs.algs4.StdIn;
 import edu.princeton.cs.algs4.StdOut;
+import edu.princeton.cs.algs4.StdRandom;
 
 public class TestFirst22 {
 	
 	public static void main(String[] args){
+		output(input());
+	}
+	
+	public static Map input(){
+		// input an array from the console 
 		StdOut.println("Please input an array:");
 		String[] arrayString = StdIn.readLine().split(" ");
-		int[] arrayInt = new int[arrayString.length];
+		int[] arrayIn = new int[arrayString.length];
 		for (int i = 0; i < arrayString.length; i++){
-			arrayInt[i] = Integer.parseInt(arrayString[i]);
+			arrayIn[i] = Integer.parseInt(arrayString[i]);
 		}
-		Arrays.sort(arrayInt);
+				
+		/*
+		// input an array from random generator
+		   int[] arrayIn = new int[10];
+		   for (int i = 0; i < arrayIn.length; i++) {
+		      arrayIn[i] = StdRandom.uniform(10);
+		   }
+		*/
+				
+		Arrays.sort(arrayIn);
 		StdOut.println("Please input the key:");
 		int key = StdIn.readInt();
-		int result = rank(key, arrayInt);
-		if (result == -1){
-			StdOut.print("The key is not in the array.");
-		}else{
-			StdOut.print("The key is in the array");
-		}
+		Map<Integer,int[]> inputValue = new HashMap<Integer,int[]>();
+		inputValue.put(key, arrayIn);
+		return inputValue;
 	}
-
+	
+	public static void output(Map<Integer, int[]> inputValue){
+		for (Entry<Integer, int[]> entry:inputValue.entrySet()){
+			int key = entry.getKey();
+			int[] array = entry.getValue();
+			int result = rank(key , array);
+			if (result == -1){
+				StdOut.print("The key is not in the array.");
+			}else{
+				StdOut.print("The key is in the array");
+			}	
+		}	
+	}
 	public static int rank(int key,int[] a){
 		return rank(0,key, a, 0, a.length-1);
 	}
@@ -392,5 +419,110 @@ public class TestFirst22 {
 		else
 			return -1;
 				
+	}
+}
+
+23.
+import java.util.Arrays;
+import java.util.HashMap;
+import java.util.Map;
+import java.util.Map.Entry;
+
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class TestFirst23 {
+		
+		public static void main(String[] args){
+			output(input());
+		}
+		
+		public static Map input(){
+			// input an array from the console 
+			StdOut.println("Please input an array:");
+			String[] arrayString = StdIn.readLine().split(" ");
+			int[] arrayIn = new int[arrayString.length];
+			for (int i = 0; i < arrayString.length; i++){
+				arrayIn[i] = Integer.parseInt(arrayString[i]);
+			}
+					
+			/*
+			// input an array from random generator
+			   int[] arrayIn = new int[10];
+			   for (int i = 0; i < arrayIn.length; i++) {
+			      arrayIn[i] = StdRandom.uniform(10);
+			   }
+			*/
+					
+			Arrays.sort(arrayIn);
+			StdOut.println("Please input the key:");
+			String key = StdIn.readString();
+			StdOut.println("Please input the print command(+/-):");
+			String printCommand = StdIn.readString();
+			Map<String[],int[]> inputValue = new HashMap<String[],int[]>();
+			String[] in = {key, printCommand};
+			inputValue.put(in, arrayIn);
+			return inputValue;
+		}
+		
+		public static void output(Map<String[], int[]> inputValue){
+			for (Entry<String[], int[]> entry:inputValue.entrySet()){
+				int key = Integer.parseInt(entry.getKey()[0]);
+				char printCommand = entry.getKey()[1].charAt(0);
+				int[] array = entry.getValue();
+				int result = rank(key , array);
+				if (result == -1 && printCommand == '+'){
+					StdOut.print("The key "+ key +" is not in the array.");
+				}else if (result != -1 && printCommand == '-'){
+					StdOut.print("The key "+ key +" is in the array.");
+				}	
+			}	
+		}
+		public static int rank(int key,int[] a){
+			return rank(key, a, 0, a.length-1);
+		}
+		public static int rank( int key, int[] a, int lo, int hi ){
+			if (lo > hi) return -1;
+			int mid = lo + (hi - lo)/2;
+			if (key < a[mid]) 
+				return rank(key, a, lo, mid -1);
+			else if (key > a[mid]) 
+				return rank( key, a, mid + 1, hi);
+			else if (key == a[mid])
+				return mid;
+			else
+				return -1;
+					
+		}
+	}
+	
+24.
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class TestFirst24 {
+
+	public static void main(String[] args){
+		input();
+	}
+	
+	public static void input() {
+		StdOut.println("Please input the first integer:");
+		int p = StdIn.readInt();
+		StdOut.println("Please input the second interger:");
+		int q = StdIn.readInt();
+		if (p < q){
+			int temp = p;
+			p = q;
+			q = temp;
+		}
+		int result = euclid(p,q);
+		StdOut.print("The greatest common divisor of "+ p +" and " + q + " is " + result);
+	}
+	public static int euclid(int p, int q){
+		StdOut.println("The first argument p is " + p + ", the second argument q is " +q);
+		if (q ==0) return p;
+		int r = p % q;
+		return euclid(q,r);
 	}
 }
