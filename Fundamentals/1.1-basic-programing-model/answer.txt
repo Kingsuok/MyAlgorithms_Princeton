@@ -526,3 +526,83 @@ public class TestFirst24 {
 		return euclid(q,r);
 	}
 }
+
+The result of the greatest common divisor of 1111111 and 1234567:
+
+Please input the first integer:
+1111111
+Please input the second interger:
+1234567
+The first argument p is 1234567, the second argument q is 1111111
+The first argument p is 1111111, the second argument q is 123456
+The first argument p is 123456, the second argument q is 7
+The first argument p is 7, the second argument q is 4
+The first argument p is 4, the second argument q is 3
+The first argument p is 3, the second argument q is 1
+The first argument p is 1, the second argument q is 0
+The greatest common divisor of 1234567 and 1111111 is 1
+
+25.
+	Using mathematical induction to prove Euclid's algorithm.
+	
+	Euclid's algorithm appears as the solution to the problem:
+	Given two numbers not prime to one another, to find their greatest common measure.
+	
+	Recall that the greatest common divisor (GCD) of two integers A and B is the largest integer that divides both A and B.
+
+	The Euclidean algorithm is a technique for quickly finding the GCD of two integers.
+
+	The algorithm
+
+	The Euclidean algorithm for finding GCD(A,B) is as follows:
+
+	If A = 0 , then GCD(A,B)=B since the GCD(0,B)=B, and we can stop.  
+	If B = 0 , then GCD(A,B)=A since the GCD(A,0)=A, and we can stop.  
+	Write A in quotient remainder form A=B*Q+R. 
+	Find GCD(B,R) using the Euclidean algorithm since GCD(A,B) = GCD(B,R).
+	
+	testify:
+		basing on the quotient and remainder, exist q and r to satisfy:
+		a = b*q + r, 
+		we need to testify that the set of common divisor of a and b is the same as the set of common divisor of b and r.
+		Let c is one of common divisors of a and b(in other words, c|a and c|b ,Notice: c|a means that a can be divided by c without a remainder),
+		as a = b*q + r, so c|a = c|(b*q+r) and c|b -->c|(b*q), just because c|(b*q) so c|r holds.
+		in a whole, c is also a divisor of r ---> c is a common divisor of r and b.
+		
+		Otherwise, if c is a common divisor of r and b, then c|(b*q) and c|(b*q + r), so c is a common divisor of a and b.
+		
+		In a sum, the set of common divisor of a and b is the same as the set of common divisor of b and r.
+		
+		gcd(a,b) = gcd (b,r).
+		
+		
+		注意： c|a 表示 a 可以整除 c（没有余数）， 而不是表示 c 除以 a 或 c 可以整除 a
+		欧几里德算法证明中,为什么已知d|a且d|b且a=kb+r时,就得到d|r?
+		由d|a知存在整数m1使得a = m1*d；由d|b知存在整数m2使得b = m2 * d.
+        r = a - k*b = m1*d - k * m2 * d = (m1 - k * m2) * d,m1-k*m2为整数,则d|r.
+		
+		
+		欧几里得算法：
+          如果a是一个非负整数，b是一个正整数，r = a mod b，
+          那么 a 和 b 的最大公约数等价于 b 和 r 的最大公约数
+          即  gcd(a, b) = gcd(b, r)
+      证明：
+      
+          依商和余数定理，存在q和r，满足：
+              a = bq + r , 0 £ r < b
+          如果可以证明a和b的公因子集合等于b和r公因子集合，就可以证明这个定理了。
+          令c是a和b的一个公因子。
+          有 c|(b*q)，由于 c|a 且 c|(b*q)，则 c|(a-b*q)，即c|r。
+          所以c是b和r的一个公因子。
+          反之，如果c是b和r的一个公因子，那么 c|(b*q) 且 c|(b*q+r)，所以c是a和b的一个公因子。
+          因此a和b的公因子集合等于b和r的公因子集合。
+          因此gcd(a,b)=gcd(b,r)。
+          
+          26.
+          
+          Testify:
+          From if (a > b) {t = a; a = b; b = t}, can get : a < b.
+          For the same reason, a < c, b < c; combining the three ---> a < b < c.
+          
+          27.
+          
