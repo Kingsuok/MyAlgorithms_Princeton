@@ -605,4 +605,79 @@ The greatest common divisor of 1234567 and 1111111 is 1
           For the same reason, a < c, b < c; combining the three ---> a < b < c.
           
           27.
-          
+          Using array to store computed values:
+         A array which is  N row k column : P (N,k) = (1 - p)*P(N-1,K) + p*P(N-1,k-1)
+         -----------------------------------------------
+                -         -           -           -
+         -----------------------------------------------
+                -         - P(N-1,k-1) - P(N-1,k) -
+         -----------------------------------------------
+                -         -            - P(N,k)   -
+         -----------------------------------------------
+         
+                -         -            -          -
+         -----------------------------------------------
+28.
+
+import java.nio.IntBuffer;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.HashSet;
+import java.util.List;
+import java.util.Set;
+
+import edu.princeton.cs.algs4.StdIn;
+import edu.princeton.cs.algs4.StdOut;
+
+public class TestFirst28 {
+
+	public static void main(String[] args){
+		int[] whiteList = remove(input());
+		for (int i = 0; i < whiteList.length; i++){
+			StdOut.print(whiteList[i] + " ");
+		}
+	}
+	
+	public static int[] input(){
+		StdOut.println("Please input the whiteList:");
+		String[] inputString = StdIn.readLine().split(" ");
+		int inputLength = inputString.length; 
+		int[] whiteList = new int[inputLength];
+		for (int i = 0; i < inputLength; i++){
+			whiteList[i] = Integer.parseInt(inputString[i]);
+		}
+		Arrays.sort(whiteList);
+		return whiteList;
+	}
+	
+	public static int[] remove(int[] oldWhiteList){
+		/*
+		//using set
+		Set<Integer> whiteListSet = new HashSet<Integer>();
+		for (int i = 0; i < oldWhiteList.length; i++){
+			whiteListSet.add(oldWhiteList[i]);
+		}
+		int length = whiteListSet.size()
+		int [] whiteList = new int[length];
+		for (Integer item : whiteListSet){
+			whiteList[--length] = item;
+		}
+		Arrays.sort(whiteList);
+		*/
+		
+		//using comparison
+	      List<Integer> whiteListList = new ArrayList<Integer>();
+	      whiteListList.add(oldWhiteList[0]);
+	      for (int i = 0; i < oldWhiteList.length-1; i++){
+	    	  if (oldWhiteList[i] != oldWhiteList[i+1]){
+	    		  whiteListList.add(oldWhiteList[i+1]);
+	    	  }
+	      }
+	      int[] whiteList = new int[whiteListList.size()];
+	      for (int i = 0; i < whiteListList.size(); i++){
+	    	  whiteList[i] = whiteListList.get(i);
+	      }
+	      return whiteList;
+	}
+	
+}
